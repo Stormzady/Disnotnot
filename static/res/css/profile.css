@@ -1,0 +1,76 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+.header {
+    margin: auto;
+    width: fit-content;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    position: relative;
+    font-size: 1.5rem;
+}
+
+*, *::before, *::after {
+    font-family: "Inter 24pt 24pt";
+    margin: auto;
+    width: fit-content;
+}
+
+.email {
+    font-size: small;
+}
+
+.badgewrap {
+    display: inline-flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden; /* prevent hover text from overlapping other badges */
+    max-width: 25px;   /* just enough for the icon */
+    transition: max-width 0.3s ease;
+}
+
+.badgewrap:hover {
+    max-width: 200px; /* enough to reveal the popout smoothly */
+}
+
+.badgelogo {
+    width: 25px;
+    vertical-align: middle;
+    flex-shrink: 0;
+}
+
+.badgepopout {
+    color: #7289da;
+    margin-left: 5px;
+    opacity: 0;
+    transform: translateX(-5px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    white-space: nowrap;
+    font-size: medium;
+}
+
+.badgewrap:hover .badgepopout {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+html, body {
+    height: fit-content;
+    width: fit-content;
+    padding: 0;
+}
+
+html {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.badgerow {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 0.25rem;
+}
