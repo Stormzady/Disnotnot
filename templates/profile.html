@@ -1,0 +1,33 @@
+<link rel="stylesheet" href="/res/css/profile.css">
+
+<h2 class="header">
+  {{ username }}
+</h2>
+<div class="badgerow">
+  {% if created_via == 'discord' %}
+    <span class="badgewrap">
+      <img src="/res/img/discord.svg" alt="Discord logo" class="badgelogo">
+      <span class="badgepopout" title="{{ original_username }}">{{ original_username }}</span>
+    </span>
+  {% endif %}
+  {% if is_staff == True %}
+    <span class="badgewrap">
+      <img src="/res/img/staff_badge.png" alt="Staff badge" class="badgelogo">
+      <span class="badgepopout">Staff</span>
+    </span>
+  {% endif %}
+</div>
+
+<p class="email">{{ email }}</p>
+
+<p class="bio">{{ bio }}</p>
+
+{% if username == current_user.id %}
+  <p><a href="/account">Edit Your Account</a></p>
+{% endif %}
+
+<!--{% if username != original_username %}
+  <p>Original Username: {{ original_username }}</p>
+{% endif %}-->
+
+<!--<p class="type">Discord: {{ original_username }}</p>-->

@@ -1,0 +1,43 @@
+<h2>Account Settings</h2>
+<p>Username: {{ username }}</p>
+<p>Email: {{ email }}</p>
+<p>Account Created via: {{ created_via }}</p>
+<p>Original Username: {{ original_username }}</p>
+
+{% if discord_linked %}
+  <p>Your Discord account is linked!</p>
+{% else %}
+  <p>Your Discord account is not linked. <a href="/link_discord">Link Discord</a></p>
+{% endif %}
+
+{% if created_via == 'discord' and not password_set %}
+  <h3>Set a Password for Your Discord Account</h3>
+  <form method="POST">
+    <input type="password" name="new_password" placeholder="New Password" required>
+    <button type="submit">Set Password</button>
+  </form>
+  {% if message %}
+    <p>{{ message }}</p>
+  {% endif %}
+{% endif %}
+
+{% if created_via != 'discord' %}
+  <h3>Change Your Password</h3>
+  <form method="POST">
+    <input type="password" name="new_password" placeholder="New Password" required>
+    <button type="submit">Change Password</button>
+  </form>
+  {% if message %}
+    <p>{{ message }}</p>
+  {% endif %}
+{% endif %}
+
+<h3>Update Your Bio</h3>
+<form method="POST">
+  <textarea name="bio" placeholder="Enter your bio here...">{{ bio }}</textarea>
+  <button type="submit">Update Bio</button>
+</form>
+
+{% if message %}
+  <p>{{ message }}</p>
+{% endif %}

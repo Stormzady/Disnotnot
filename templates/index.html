@@ -1,0 +1,46 @@
+<link rel="stylesheet" href="/res/css/index.css">
+
+<h2>Welcome, {{ username }}! <a href="/logout">Logout</a></h2>
+<ul id="messages">
+  {% for msg in messages %}
+    <li><a href="/u/{{ msg.username }}" class="username">{{ msg.username }}</a>: {{ msg.message }}</li>
+  {% endfor %}
+</ul>
+<form id="form">
+  <input id="input" autocomplete="off" placeholder="Send a message"><button type="submit">Send</button>
+</form>
+
+<script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+<script>
+  const socket = io();
+  const form = document.getElementById('form');
+  const input = document.getElementById('input');
+  const messages = document.getElementById('messages');
+
+  const scrollToBottom = () => {
+    messages.scrollTop = messages.scrollHeight
+  }
+
+  form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      if (input.value) {
+          socket.send(input.value);
+          input.value = '';
+          scrollToBottom();
+      }
+  });
+
+  socket.on('message', function(msg) {
+    const item = document.createElement('li');
+    
+    // Create a message string with the username as a hyperlink
+    const messageContent = `<a href="/u/${msg.username}" class="username">${msg.username}</a>: ${msg.message}`;
+    
+    item.innerHTML = messageContent;  // Use innerHTML to properly handle the hyperlink
+    messages.appendChild(item);
+    
+    scrollToBottom();
+});
+
+window.addEventListener('load', scrollToBottom);
+</script>
